@@ -124,12 +124,16 @@ WSGI_APPLICATION = 'customers.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': "django.db.backends.postgresql_psycopg2",
-        'NAME': os.getenv("NAME"),
-        'HOST': os.getenv("HOST"),
-        'USER': os.getenv("USER"),
-        'PASSWORD': os.getenv("PASSWORD"),
-        'PORT': os.getenv("PORT")
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DB_NAME'),
+        'HOST': os.getenv('DB_HOST'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'PORT': os.getenv('DB_PORT', 5432),
+        'OPTIONS': {
+            'connect_timeout': 30,  # Timeout set to 30 seconds
+            'sslmode': 'require',
+        },
     }
 }
 
